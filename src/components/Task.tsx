@@ -1,6 +1,15 @@
 import {FaTimes} from 'react-icons/fa'; 
 
-const Task = ({task, onDelete, onToggle}) => {
+// Types
+import {TaskType} from '../App';
+
+type Props = {
+    task: TaskType;
+    onDelete: (id: number) => void;
+    onToggle: (id: number) => void
+}
+
+const Task: React.FC<Props> = ({task, onDelete, onToggle}) => {
     return (
         <div className={`task ${task.reminder ? 'reminder' : ''}`} onDoubleClick={() => onToggle(task.id)}>
             <h3>

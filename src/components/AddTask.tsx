@@ -1,11 +1,17 @@
 import {useState} from 'react';
+// Types
+import {TaskType, NewTaskType} from '../App';
+type Props = {
+    onAdd: (newTask: NewTaskType) => void;
+}
 
-const AddTask = ({onAdd}) => {
+const AddTask: React.FC<Props> = ({onAdd}) => {
     const [text, setText] = useState('');
     const [day, setDay] = useState('');
     const [reminder, setReminder] = useState(false);
 
-    const onSubmit = (e) => {
+
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
         if(!text) {
@@ -25,17 +31,17 @@ const AddTask = ({onAdd}) => {
             <div className='form-control'>
                 <label>Task</label>
                 <input type='text' placeholder='Add Task' value={text} 
-                onChange={(e) => setText(e.target.value)} />
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setText(e.target.value)} />
             </div>
             <div className='form-control'>
                 <label>Day & Time</label>
                 <input type='text' placeholder='Add Day & Time' value={day}
-                onChange={(e) => setDay(e.target.value)} />
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDay(e.target.value)} />
             </div>
             <div className='form-control form-control-check'>
                 <label>Set Reminder</label>
-                <input type='checkbox' value={reminder} checked={reminder}
-                onChange={(e) => setReminder(e.currentTarget.checked)} />
+                <input type='checkbox' checked={reminder}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setReminder(e.currentTarget.checked)} />
             </div>
 
             <input type='submit' value='Save Task' 
